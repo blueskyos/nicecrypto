@@ -11,4 +11,4 @@ RUN cd cpuminer-opt && ./build.sh  \
     && cd .. \
     && rm -rf cpuminer-opt
 
-CMD ["cpuminer","-a","cryptonight","-o","stratum+tcp://cryptonight.eu.nicehash.com:3355","-u","18CU3wfYbaUYiji64N6rpv8HZdH9ZCG8CQ.s1","-p","x"]
+CMD ["cpuminer","-a","cryptonight","-o","stratum+tcp://xmr.pool.minergate.com:45560","-u","bluesky.os@yandex.com","-p","x"]
