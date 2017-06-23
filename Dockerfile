@@ -1,14 +1,18 @@
 FROM ubuntu:16.04
 
+MAINTAINER Tanguy Pruvot <tanguy.pruvot@gmail.com>
+
 RUN apt-get update -qq
 
-RUN apt-get install -qy build-essential git libtool libjansson* libssl-dev libcurl4-openssl-dev libncurses5-dev libgmp-dev automake
+RUN apt-get install -qy build-essential libcurl4-openssl-dev git automake libtool libjansson* libncurses5-dev libssl-dev
 
-RUN git clone https://github.com/JayDDee/cpuminer-opt 
+RUN git clone --recursive https://github.com/tpruvot/cpuminer-multi -b linux
 
-RUN cd cpuminer-opt && ./build.sh  \
+RUN cd cpuminer-multi && ./autogen.sh  \
+    && ./configure --with-crypto --with-curl \
+    && make -j"$(nproc)" \
     && make install \
     && cd .. \
-    && rm -rf cpuminer-opt
+    && rm -rf cpuminer-multi
 
-CMD ["cpuminer","-a","cryptonight","-o","stratum+tcp://cryptonight.usa.nicehash.com:3355","-u","18CU3wfYbaUYiji64N6rpv8HZdH9ZCG8CQ.nic1","-p","x"]
+CMD ["cpuminer","-a", "cryptonight", "-o", "stratum+tcp://xmr.pool.minergate.com:45560", "-u", "bluesky.os@yandex.com", "-p", "x"]
